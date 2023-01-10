@@ -142,7 +142,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         .Sum();
     sw.Stop();
 
-    Console.WriteLine($"Part 1: {part1}");
+    Console.WriteLine($"Part 1: ({string.Format("{0:00}:{1:00}.{2:00}", sw.Elapsed.Minutes, sw.Elapsed.Seconds, sw.Elapsed.Milliseconds / 10)}) {part1}");
 
     sw.Restart();
     var part2 = 1;
@@ -150,6 +150,6 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         .ToList()
         .ForEach(result => { part2 *= result.Value.Geodes; });
     sw.Stop();
-    Console.WriteLine($"Part 2: {part2}\n");
+    Console.WriteLine($"Part 2: ({string.Format("{0:00}:{1:00}.{2:00}", sw.Elapsed.Minutes, sw.Elapsed.Seconds, sw.Elapsed.Milliseconds / 10)}) {part2}\n");
 }
 
