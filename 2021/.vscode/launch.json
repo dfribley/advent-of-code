@@ -24,6 +24,17 @@
             "stopAtEntry": false
         },
         {
+            "name": "Day 9",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build9",
+            "program": "${workspaceFolder}/Day9/bin/Debug/net7.0/Day9.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Day9",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
