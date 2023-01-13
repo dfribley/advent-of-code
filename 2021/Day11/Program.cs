@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-Console.WriteLine("AOC - Day 5\n\n");
+Console.WriteLine("AOC - Day 11\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
