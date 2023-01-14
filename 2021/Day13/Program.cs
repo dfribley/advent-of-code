@@ -3,7 +3,7 @@ using AoC.Shared.Strings;
 using Shared.Enumerable;
 using System.Numerics;
 
-Console.WriteLine("AOC - Day 12\n\n");
+Console.WriteLine("AOC - Day 13\n\n");
 
 static void foldThePaper(HashSet<Vector2> dots, (string axis, int value) fold)
 {
