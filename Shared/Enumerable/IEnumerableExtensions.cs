@@ -13,7 +13,7 @@
             newValues.AddRange(values.Take(index));
 
             return newValues;
-        }    
+        }
 
         public static IEnumerable<SplitGroup<T>> Split<T>(this IEnumerable<T> values, Func<T, bool> delimiterTest)
         {
@@ -78,6 +78,18 @@
                     Values = group
                 };
             }
+        }
+
+        public static long Product(this IEnumerable<long> values)
+        {
+            var product = 1L;
+
+            foreach(var value in values)
+            {
+                product *= value;
+            }
+
+            return product;
         }
     }
 }
