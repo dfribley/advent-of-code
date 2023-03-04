@@ -2,7 +2,6 @@
 
 Console.WriteLine("AOC - Day 14\n\n");
 
-
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
     Console.WriteLine($"[{inputFile}]\n");
@@ -20,25 +19,50 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         })
         .ToDictionary(t => t.pattern, t => t.insert);
 
-
-    var rounds = 40;
-
-    while (rounds-- > 0)
+    IEnumerable<long> getCounts(string template, int steps)
     {
-        for (var i = template.Length - 1; i > 0; i--)
-        {
-            var pair = template.Substring(i - 1, 2);
+        var counts = new Dictionary<string, long>();
 
-            if (rules.ContainsKey(pair))
-            {
-                template = template.Insert(i, rules[pair]);
-            }
+        for (var i = 0; i < template.Length - 1; i++)
+        {
+            var pair = template.Substring(i, 2);
+
+            counts.TryAdd(pair, 0);
+            counts[pair]++;
         }
+
+        while (steps-- > 0)
+        {
+            var newCounts = new Dictionary<string, long>();
+
+            foreach (var pair in counts.Keys)
+            {
+                var insert = rules[pair];
+
+                foreach(var newPair in new[] { $"{pair[0]}{insert}", $"{insert}{pair[1]}" })
+                {
+                    newCounts.TryAdd(newPair, 0);
+                    newCounts[newPair] += counts[pair];
+                }
+            }
+
+            counts = newCounts;
+        }
+
+        var characterCounts = counts.Keys
+            .Select(k => (character: k[0], count: counts[k]))
+            .GroupBy(t => t.character)
+            .ToDictionary(g => g.Key, g => g.Sum(t => t.count));
+
+        characterCounts.TryAdd(template.Last(), 0);
+        characterCounts[template.Last()]++;
+
+        return characterCounts.Values.Order().ToArray();
     }
 
-    var counts = template.GroupBy(c => c).Select(g => g.LongCount()).Order().ToList();
+    var counts10 = getCounts(template, 10);
+    Console.WriteLine($"Part 1: {counts10.Last() - counts10.First()}");
 
-    Console.WriteLine($"Part 1: {counts.Last() - counts.First()}");
-
-    Console.WriteLine("Part 2:\n");
+    var counts40 = getCounts(template, 40);
+    Console.WriteLine($"Part 2: {counts40.Last() - counts40.First()}\n");
 }
