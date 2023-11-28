@@ -7,4 +7,10 @@
     <RootNamespace>AoC.Shared</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Field\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Field\" />
+  </ItemGroup>
 </Project>

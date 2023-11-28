@@ -26,4 +26,14 @@ public static class StringExtensions
             i = str.IndexOf(value, i + value.Length);
         }
     }
+
+    public static bool IsIntBetween(this string value, int low, int high)
+    {
+        if (!int.TryParse(value, out var number))
+        {
+            return false;
+        }
+
+        return low <= number && number <= high;
+    }
 }
