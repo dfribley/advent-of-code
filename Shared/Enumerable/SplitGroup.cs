@@ -1,8 +1,7 @@
-﻿namespace Shared.Enumerable
+﻿namespace AoC.Shared.Enumerable;
+
+public class SplitGroup<T>
 {
-    public class SplitGroup<T>
-    {
-        public int Id { get; set; }
-        public IEnumerable<T> Values { get; set; }
-    }
+    public int Id { get; set; }
+    public IEnumerable<T> Values { get; set; }
 }

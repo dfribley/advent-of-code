@@ -1,9 +1,8 @@
-﻿namespace AoC.Shared.PaperRockScissors
+﻿namespace AoC.Shared.PaperRockScissors;
+
+public enum Outcome
 {
-    public enum Outcome
-    {
-        Win,
-        Lose,
-        Draw
-    }
+    Win,
+    Lose,
+    Draw
 }

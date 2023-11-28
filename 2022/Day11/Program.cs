@@ -1,7 +1,7 @@
 ﻿using AoC.Puzzle11;
+using AoC.Shared.Collections;
+using AoC.Shared.Enumerable;
 using AoC.Shared.Strings;
-using Shared.Collections;
-using Shared.Enumerable;
 
 Console.WriteLine("AOC - Day 11\n");
 

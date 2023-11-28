@@ -1,9 +1,8 @@
-﻿namespace AoC.Shared.PaperRockScissors
+﻿namespace AoC.Shared.PaperRockScissors;
+
+public enum Shape
 {
-    public enum Shape
-    {
-        Paper,
-        Rock,
-        Scissors
-    }
+    Paper,
+    Rock,
+    Scissors
 }

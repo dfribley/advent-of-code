@@ -1,7 +1,7 @@
-﻿using AoC.Shared.Strings;
-using Shared.Lines;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Numerics;
+using AoC.Shared.Lines;
+using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 13\n");
 

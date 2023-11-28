@@ -1,7 +1,7 @@
-﻿using AoC.Shared.Points;
-using Shared.Collections;
-using System.Collections;
+﻿using System.Collections;
 using System.Text;
+using AoC.Shared.Collections;
+using AoC.Shared.Points;
 using P = System.Drawing.Point;
 
 var shapes = new[]

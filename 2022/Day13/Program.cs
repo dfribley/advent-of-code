@@ -1,5 +1,5 @@
 ﻿using AoC.Day13;
-using Shared.Enumerable;
+using AoC.Shared.Enumerable;
 
 Console.WriteLine("AOC - Day 13\n");
 

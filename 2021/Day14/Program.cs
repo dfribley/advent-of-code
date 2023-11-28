@@ -1,4 +1,4 @@
-﻿using Shared.Enumerable;
+﻿using AoC.Shared.Enumerable;
 
 Console.WriteLine("AOC - Day 14\n\n");
 

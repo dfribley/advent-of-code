@@ -1,5 +1,5 @@
-﻿using Shared.Lines;
-using System.Drawing;
+﻿using System.Drawing;
+using AoC.Shared.Lines;
 
 Console.WriteLine("AOC - Day 5\n\n");
 

@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace AoC.Shared.Collections;
 
-namespace AoC.Shared.Collections
+public static class ByteExtensions
 {
-    public static class ByteExtensions
+    public static bool GetBit(this byte b, int bitNumber)
     {
-        public static bool GetBit(this byte b, int bitNumber)
-        {
-            return (b & (1 << bitNumber)) != 0;
-        }
+        return (b & (1 << bitNumber)) != 0;
     }
 }

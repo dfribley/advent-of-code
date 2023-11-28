@@ -1,7 +1,7 @@
-﻿using AoC.Shared.PixelWriter;
+﻿using System.Numerics;
+using AoC.Shared.Enumerable;
+using AoC.Shared.PixelWriter;
 using AoC.Shared.Strings;
-using Shared.Enumerable;
-using System.Numerics;
 
 Console.WriteLine("AOC - Day 13\n\n");
 

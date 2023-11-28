@@ -1,6 +1,6 @@
-﻿using AoC.Shared.Strings;
-using Shared.Enumerable;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
+using AoC.Shared.Enumerable;
+using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 5\n\n");
 

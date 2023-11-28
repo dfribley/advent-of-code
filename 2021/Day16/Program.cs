@@ -1,7 +1,6 @@
 ﻿using AoC.Shared.Collections;
+using AoC.Shared.Enumerable;
 using AoC.Shared.Strings;
-using Shared.Collections;
-using Shared.Enumerable;
 
 Console.WriteLine("AOC - Day 16\n\n");
 

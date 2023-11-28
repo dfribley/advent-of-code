@@ -1,26 +1,25 @@
-﻿namespace AoC.Shared.PixelWriter
+﻿namespace AoC.Shared.PixelWriter;
+
+public class PixelWriter
 {
-    public class PixelWriter
+    private readonly int _width;
+
+    public PixelWriter(int width)
     {
-        private readonly int _width;
+        _width = width;
+    }
 
-        public PixelWriter(int width)
+    public int LineNumber { get; private set; } = 0;
+    public int ColumnNumber { get; private set; } = 0;
+
+    public void Write(char pixel)
+    {
+        Console.Write(pixel);
+
+        if (++ColumnNumber == _width)
         {
-            _width = width;
-        }
-
-        public int LineNumber { get; private set; } = 0;
-        public int ColumnNumber { get; private set; } = 0;
-
-        public void Write(char pixel)
-        {
-            Console.Write(pixel);
-
-            if (++ColumnNumber == _width)
-            {
-                Console.WriteLine();
-                ColumnNumber = 0;
-            }
+            Console.WriteLine();
+            ColumnNumber = 0;
         }
     }
 }

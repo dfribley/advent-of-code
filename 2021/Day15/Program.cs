@@ -1,7 +1,7 @@
-﻿using AoC.Shared.Strings;
-using Shared.Distance;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Numerics;
+using AoC.Shared.Distance;
+using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 15\n\n");
 

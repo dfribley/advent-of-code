@@ -1,8 +1,7 @@
-﻿namespace AoC.Shared.PaperRockScissors
+﻿namespace AoC.Shared.PaperRockScissors;
+
+public class PlayerResult
 {
-    public class PlayerResult
-    {
-        public Shape Shape { get; init; }
-        public Outcome Result { get; init; }
-    }
+    public Shape Shape { get; init; }
+    public Outcome Result { get; init; }
 }

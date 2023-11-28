@@ -1,7 +1,7 @@
-﻿using AoC.Shared.Strings;
-using Shared.Collections;
-using Shared.Enumerable;
-using System.Numerics;
+﻿using System.Numerics;
+using AoC.Shared.Collections;
+using AoC.Shared.Enumerable;
+using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 23\n");
 

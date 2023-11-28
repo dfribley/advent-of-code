@@ -1,5 +1,5 @@
-﻿using AoC.Shared.Strings;
-using Shared.Enumerable;
+﻿using AoC.Shared.Enumerable;
+using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 1\n\n");
 
