@@ -80,6 +80,18 @@ public static class IEnumerableExtensions
         }
     }
 
+    public static IEnumerable<T> Intersect<T>(this IEnumerable<IEnumerable<T>> collection)
+    {
+        var result = collection.First();
+
+        foreach(var values in collection.Skip(1))
+        {
+            result = result.Intersect(values);
+        }
+
+        return result;
+    }
+
     public static long Product(this IEnumerable<long> values)
     {
         var product = 1L;
