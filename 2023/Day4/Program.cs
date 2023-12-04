@@ -15,8 +15,8 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
             var id = parts[0].Split(" ", StringSplitOptions.RemoveEmptyEntries)[1].ToInt32();
 
             parts = parts[1].Split("|");
-            var mine = parts[0].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(num => num.ToInt32());
-            var winning = parts[1].Split(" ", StringSplitOptions.RemoveEmptyEntries).Select(num => num.ToInt32());
+            var mine = parts[0].Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            var winning = parts[1].Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
             return (id, matches: mine.Where(winning.Contains).Count());
         })
@@ -28,14 +28,18 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     Console.WriteLine($"Part 1: { part1 }");
 
-    var cardCounts = new Dictionary<int, int>();
-    cardCounts.Seed(Enumerable.Range(1, cards.Count), 1);
+    var cardCounts = cards.ToDictionary(c => c.id, c => 1);
 
     cards.ForEach(card =>
     {
         while (card.matches > 0)
         {
-            cardCounts[card.id + card.matches--] += cardCounts[card.id];
+            var cloneId = card.id + card.matches--;
+
+            if (cardCounts.ContainsKey(cloneId))
+            {
+                cardCounts[cloneId] += cardCounts[card.id];
+            }
         }
     });
 
