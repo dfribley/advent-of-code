@@ -52,7 +52,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .Select(g => g.id)
         .Sum();
 
-    Console.WriteLine($"Part 1: { part1 }");
+    Console.WriteLine($"Part 1: {part1}");
 
     var part2 = games
         .Select(g =>
@@ -72,5 +72,5 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         })
         .Sum();
 
-    Console.WriteLine($"Part 2: { part2 }\n");
+    Console.WriteLine($"Part 2: {part2}\n");
 }

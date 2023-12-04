@@ -15,7 +15,7 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt"})
         .Select(d => d.First().ToInt32() * 10 + d.Last().ToInt32())
         .Sum();
 
-    Console.WriteLine($"Part 1: { part1 }");
+    Console.WriteLine($"Part 1: {part1}");
 
     var numbers = new[] { "one", "two", "three", "four", "five", "six", "seven", "eight", "nine" };
     var part2 = input
@@ -47,5 +47,5 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt"})
         .Select(digits => digits.First() * 10 + digits.Last())
         .Sum();
 
-    Console.WriteLine($"Part 2: { part2 }\n");
+    Console.WriteLine($"Part 2: {part2}\n");
 }

@@ -54,14 +54,14 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
             {
                 number += grid[coord];
 
-                foreach (var neighbor in grid.Neighbors(coord))
+                foreach (var (coordinate, value) in grid.Neighbors(coord))
                 {
-                    if (neighbor.value == '*')
+                    if (value == '*')
                     {
-                        gears.Add(neighbor.coordinate);
+                        gears.Add(coordinate);
                     }
 
-                    if (neighbor.value != '.' && !neighbor.value.IsDigit())
+                    if (value != '.' && !value.IsDigit())
                     {
                         isPart = true;
                     }
@@ -76,6 +76,6 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         processPartNumber();
     }
 
-    Console.WriteLine($"Part 1: { partNumbers.Sum() }");
-    Console.WriteLine($"Part 2: { gearParts.Where(kvp => kvp.Value.Count == 2).Select(kvp => kvp.Value.Product()).Sum() }\n");
+    Console.WriteLine($"Part 1: {partNumbers.Sum()}");
+    Console.WriteLine($"Part 2: {gearParts.Where(kvp => kvp.Value.Count == 2).Select(kvp => kvp.Value.Product()).Sum()}\n");
 }

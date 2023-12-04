@@ -26,7 +26,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .Select(c => c.matches > 0 ? Math.Pow(2, c.matches - 1) : 0)
         .Sum();
 
-    Console.WriteLine($"Part 1: { part1 }");
+    Console.WriteLine($"Part 1: {part1}");
 
     var cardCounts = cards.ToDictionary(c => c.id, c => 1);
 
@@ -43,5 +43,5 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         }
     });
 
-    Console.WriteLine($"Part 2: { cardCounts.Values.Sum() }\n");
+    Console.WriteLine($"Part 2: {cardCounts.Values.Sum()}\n");
 }
