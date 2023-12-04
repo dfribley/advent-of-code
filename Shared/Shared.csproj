@@ -8,11 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Field\" />
     <None Remove="BinarySearch\" />
+    <None Remove="Grid\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Field\" />
     <Folder Include="BinarySearch\" />
+    <Folder Include="Grid\" />
   </ItemGroup>
 </Project>

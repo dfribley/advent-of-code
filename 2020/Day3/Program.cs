@@ -1,6 +1,6 @@
 using System.Drawing;
 using AoC.Shared.Enumerable;
-using AoC.Shared.Field;
+using AoC.Shared.Grid;
 using AoC.Shared.Points;
 
 Console.WriteLine("AOC - Day 3\n\n");
@@ -11,7 +11,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     var field = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
-        .ToField();
+        .ToGrid();
     field.WrapEast = true;
 
     long totalTrees(Point slope)

@@ -36,4 +36,9 @@ public static class StringExtensions
 
         return low <= number && number <= high;
     }
+
+    public static bool IsDigit(this char c)
+    {
+        return char.IsDigit(c);
+    }
 }
