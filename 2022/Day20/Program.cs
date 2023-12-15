@@ -56,11 +56,16 @@ static long mixFile(IList<long> file, int rounds)
         .Sum();
 }
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
 
-    var file = File.ReadLines(input)
+    Console.WriteLine($"[{inputFile}]\n");
+
+    var file = File.ReadLines(inputFile)
         .Select(l => l.ToInt64())
         .ToList();
 

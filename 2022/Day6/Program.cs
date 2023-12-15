@@ -24,6 +24,11 @@ static int indexOfUniqueMarker(string stream, int markerSize)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
     
     var stream = File.ReadAllText(inputFile);

@@ -17,6 +17,11 @@ static char getMostCommonBit(IList<string> list, int index)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var report = File.ReadAllLines(inputFile).ToList();

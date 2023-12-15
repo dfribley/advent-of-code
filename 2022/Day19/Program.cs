@@ -112,11 +112,16 @@ static IDictionary<BluePrint, GameState> processBlueprints(IEnumerable<BluePrint
     return results;
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
 
-    var blueprints = File.ReadAllLines(input)
+    Console.WriteLine($"[{inputFile}]\n");
+
+    var blueprints = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
         .Select(line =>
         {

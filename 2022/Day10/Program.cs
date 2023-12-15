@@ -7,6 +7,11 @@ var pixelWriter = new PixelWriter(40);
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var cycles = new Dictionary<int, int>();

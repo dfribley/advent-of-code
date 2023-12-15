@@ -2,9 +2,14 @@
 
 Console.WriteLine("AOC - Day 21\n");
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
+    Console.WriteLine($"[{inputFile}]\n");
 
     var valueMonkeys = new Dictionary<string, long>();
     var mathMonkeys = new Dictionary<string, string[]>();
@@ -33,7 +38,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         };
     };
 
-    File.ReadLines(input)
+    File.ReadLines(inputFile)
         .Where(l => !string.IsNullOrEmpty(l))
         .ToList()
         .ForEach(l =>

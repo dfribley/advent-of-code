@@ -45,9 +45,14 @@ static long getMaxPressureRelease(IDictionary<int, (string id, int flowRate, IEn
     return maxPressureForState(startPosition, 0, minutes, totalPlayers);
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    var valves = File.ReadAllLines(input)
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
+    var valves = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
         .Select(line =>
         {
@@ -62,7 +67,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         .Select((valve, i) => (valve, i))
         .ToDictionary(t => t.i, t => t.valve);
 
-    Console.WriteLine($"{input}\n");
+    Console.WriteLine($"{inputFile}\n");
 
     var sw = new Stopwatch();
     sw.Start();

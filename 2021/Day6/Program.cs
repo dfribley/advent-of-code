@@ -22,6 +22,11 @@ static long modelGrowth(IDictionary<int, long> fish, int days)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var fish = File.ReadAllText(inputFile)

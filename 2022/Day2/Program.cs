@@ -20,6 +20,11 @@ static int scoreRound(PlayerResult result)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var part1 = File.ReadLines(inputFile)

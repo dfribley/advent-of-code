@@ -13,9 +13,14 @@ var adjacentPositions = new[]
     new Vector3(0, 0, 1)
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    var cubes = File.ReadAllLines(input)
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
+    var cubes = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
         .Select(line =>
         {
@@ -25,7 +30,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         })
         .ToHashSet();
 
-    Console.WriteLine($"[{input}]\n");
+    Console.WriteLine($"[{inputFile}]\n");
 
     var part1 = cubes
         .Select(c => adjacentPositions.Where(ap => !cubes.Contains(c + ap)).Count())

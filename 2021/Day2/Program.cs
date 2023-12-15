@@ -3,11 +3,16 @@ using System.Numerics;
 
 Console.WriteLine("AOC - Day 2\n\n");
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
 
-    var moves = File.ReadAllLines(input)
+    Console.WriteLine($"[{inputFile}]\n");
+
+    var moves = File.ReadAllLines(inputFile)
         .Select(line =>
         {
             var parts = line.Split(" ");

@@ -5,6 +5,11 @@ Console.WriteLine("AOC - Day 1\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var elfLogs = File.ReadLines(inputFile).Split(string.IsNullOrEmpty);

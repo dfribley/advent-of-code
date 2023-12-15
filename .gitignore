@@ -351,3 +351,6 @@ MigrationBackup/
 
 # Mac files
 .DS_Store
+
+# My AOC Input
+input.txt

@@ -45,6 +45,11 @@ static int findFastestPath(IDictionary<Vector2, int> elevations, IEnumerable<Vec
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var start = default(Vector2);

@@ -50,6 +50,11 @@ static long getMonkeyBusiness(IDictionary<int, Monkey> monkeys, int rounds, Func
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var monkeys = File.ReadAllLines(inputFile)

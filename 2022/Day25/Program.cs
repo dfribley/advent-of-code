@@ -81,10 +81,15 @@ static string toSnafu(long base10)
     return snafu.ToString();   
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
+    Console.WriteLine($"[{inputFile}]\n");
     
-    var part1 = toSnafu(File.ReadLines(input).Select(s => toBase10(s)).Sum());
+    var part1 = toSnafu(File.ReadLines(inputFile).Select(s => toBase10(s)).Sum());
     Console.WriteLine($"Part 1: {part1}\n");
 }

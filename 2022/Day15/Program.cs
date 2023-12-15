@@ -10,6 +10,11 @@ var inputRegEx = new Regex(@"Sensor at x=(-?\d+), y=(-?\d+): closest beacon is a
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var sensorData = File.ReadAllLines(inputFile)

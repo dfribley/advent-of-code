@@ -13,9 +13,14 @@ var shapes = new[]
     new [] { new P(0, 0), new P(0, 1), new P(1, 0), new P(1, 1) }
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    var jets = File.ReadAllText(input).Trim();
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
+    var jets = File.ReadAllText(inputFile).Trim();
 
     long getTowerHeight(long numberOfRocks)
     {
@@ -138,7 +143,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         return height + heightAdjust;
     }
 
-    Console.WriteLine($"{input}\n");
+    Console.WriteLine($"{inputFile}\n");
 
     var part1 = getTowerHeight(2022);
     

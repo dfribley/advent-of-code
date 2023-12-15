@@ -9,6 +9,11 @@ static int getPart2FuelCost(int distance)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var numbers = File.ReadAllText(inputFile)

@@ -9,6 +9,11 @@ var moveRegEx = new Regex(@"move (\d+) from (\d+) to (\d+)");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var input = File

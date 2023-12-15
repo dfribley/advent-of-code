@@ -24,6 +24,11 @@ var pointValues = new Dictionary<char, int>
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var input = File.ReadAllLines(inputFile)

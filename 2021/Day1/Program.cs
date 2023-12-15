@@ -1,10 +1,15 @@
 ﻿Console.WriteLine("AOC - Day 1\n\n");
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
 
-    var values = File.ReadAllLines(input)
+    Console.WriteLine($"[{inputFile}]\n");
+
+    var values = File.ReadAllLines(inputFile)
         .Select(line => Convert.ToInt32(line))
         .ToList();
 

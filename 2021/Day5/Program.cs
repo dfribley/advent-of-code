@@ -5,6 +5,11 @@ Console.WriteLine("AOC - Day 5\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var lines = File.ReadAllLines(inputFile)

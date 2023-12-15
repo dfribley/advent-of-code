@@ -5,6 +5,11 @@ Console.WriteLine("AOC - Day 8\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var trees = File.ReadAllLines(inputFile).ToList();

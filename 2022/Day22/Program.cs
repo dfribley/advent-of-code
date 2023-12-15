@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 // TODO: Clean this up
 Console.WriteLine("AOC - Day 22\n");
 
-var input = File.ReadLines("input.txt")
+var input = File.ReadLines("sample.txt")
     .ToList();
 
 var board = new List<string>();

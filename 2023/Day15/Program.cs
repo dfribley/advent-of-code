@@ -20,6 +20,11 @@ static int hash(string str)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var steps = File.ReadAllLines(inputFile)

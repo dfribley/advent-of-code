@@ -23,10 +23,15 @@ var considerations = new[]
     new [] { E, NE, SE },
 };
 
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     // Elf positioning system
-    var eps = File.ReadLines(input)
+    var eps = File.ReadLines(inputFile)
         .SelectMany((line, row) =>
         {
             var i = line.AllIndexesOf("#");
@@ -35,7 +40,7 @@ foreach (var input in new[] { "sample.txt", "input.txt" })
         })
         .ToHashSet();
 
-    Console.WriteLine($"[{input}]\n");
+    Console.WriteLine($"[{inputFile}]\n");
 
     int moveTheElves(HashSet<Vector2> elves, Func<int, int, bool> endState)
     {

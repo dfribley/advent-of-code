@@ -65,6 +65,11 @@ static int simulateMotions(IList<(string, int)> moves, int knotCount)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var moves = File.ReadAllLines(inputFile)

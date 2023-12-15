@@ -31,6 +31,11 @@ static void foldThePaper(HashSet<Vector2> dots, (string axis, int value) fold)
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var input = File.ReadAllLines(inputFile)

@@ -4,6 +4,11 @@ Console.WriteLine("AOC - Day 4\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var cards = File.ReadAllLines(inputFile)

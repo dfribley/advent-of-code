@@ -54,6 +54,11 @@ static int dropTheSand(HashSet<Vector2> rocks, Vector2 start, Func<Vector2, bool
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var rocks = new HashSet<Vector2>();

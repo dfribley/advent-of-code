@@ -7,6 +7,11 @@ var neighbors = new[] { new Vector2(0, -1), new Vector2(-1, 0), new Vector2(1, 0
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
+
     Console.WriteLine($"[{inputFile}]\n");
 
     var input = File.ReadAllLines(inputFile)

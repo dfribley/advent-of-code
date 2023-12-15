@@ -1,14 +1,17 @@
 ﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Numerics;
 
 Console.WriteLine("AOC - Day 24\n");
-foreach (var input in new[] { "sample.txt", "input.txt" })
+foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
-    Console.WriteLine($"[{input}]\n");
+    if (!File.Exists(inputFile))
+    {
+        continue;
+    }
 
-    var valley = File.ReadLines(input).ToList();
+    Console.WriteLine($"[{inputFile}]\n");
+
+    var valley = File.ReadLines(inputFile).ToList();
     var maxRow = valley.Count;
     var maxCol = valley[0].Length;
 
