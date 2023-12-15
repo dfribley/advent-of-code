@@ -4,7 +4,7 @@ source ~/aoc_envars
 
 mkdir Day$1
 
-cat > Day$1/Day$1.csproj << 'EOF'
+cat > Day$1/Day$1.csproj << EOF
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -12,6 +12,8 @@ cat > Day$1/Day$1.csproj << 'EOF'
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
+    <PublishSingleFile>True</PublishSingleFile>
+    <AssemblyName>day$1</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

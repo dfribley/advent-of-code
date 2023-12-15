@@ -115,4 +115,9 @@ public static class IEnumerableExtensions
 
         return product;
     }
+
+    public static Wrapable<Type> AsWrapable<Type>(this IEnumerable<Type> collection)
+    {
+        return new Wrapable<Type>(collection);
+    }
 }
