@@ -37,7 +37,9 @@ public class Grid
 
 	public Point BottomLeft { get => new(0, 0); }
 
-	public char this[Point point]
+	public Point BottomRight { get => new(MaxX, 0); }
+
+    public char this[Point point]
 	{
 		get => GetCharAt(point.X, point.Y);
         set => SetCharAt(point.X, point.Y, value);
@@ -55,6 +57,17 @@ public class Grid
 			   (point.X <= MaxX || WrapEast) &&
 			   (point.Y >= 0 || WrapSouth) &&
 			   (point.Y <= MaxY || WrapNorth);
+    }
+
+	public IEnumerable<(Point coordinate, char value)> All()
+    {
+        for (int y = 0; y <= MaxY; y++)
+        {
+            for (int x = 0; x < _grid[0].Length; x++)
+            {
+                yield return (new Point(x, y), this[x, y]);
+            }
+        }
     }
 
 	public IEnumerable<(Point coordinate, char value)> Neighbors(Point coordinate)
