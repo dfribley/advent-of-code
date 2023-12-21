@@ -156,7 +156,7 @@ public class Grid
 
 		if (x < 0 && WrapWest)
 		{
-			y += x % _grid[0].Length;
+			x = TotalX + ((x + 1) % TotalX) - 1;
 		}
 
 		if (y > MaxY && WrapNorth)
@@ -166,7 +166,7 @@ public class Grid
 
 		if (y < 0 && WrapSouth)
 		{
-			y += y % _grid.Length;
+			y = TotalY + ((y + 1) % TotalY) - 1;
 		}
 
 		return _grid[y][x];
