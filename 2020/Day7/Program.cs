@@ -30,12 +30,13 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
             return (bag, contents);
         })
         .ToDictionary(b => b.bag, b => b.contents);
+    var shinyGold = "shinygold";
 
     bool containsShinyBag(string bag)
     {
         foreach(var subBag in bags[bag])
         {
-            if (subBag.bag == "shinygold" || containsShinyBag(subBag.bag))
+            if (subBag.bag == shinyGold || containsShinyBag(subBag.bag))
             {
                 return true;
             }
@@ -57,5 +58,5 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     }
 
     Console.WriteLine($"Part 1: {bags.Keys.Where(containsShinyBag).Count()}");
-    Console.WriteLine($"Part 2: {countSubBags("shinygold")}\n");
+    Console.WriteLine($"Part 2: {countSubBags(shinyGold)}\n");
 }
