@@ -120,13 +120,16 @@ foreach (var inputFile in new[] { "sample.txt" ,"input.txt" })
 
     // Determine which bricks would fall if a specific brick as disintegrated
 
-    int wouldFall(List<int> fell)
+    int wouldFall(int brick)
     {
+        var fell = new List<int> { brick };
+        var falling = new[] { brick };
+
         while (true)
         {
-            var falling = fell
+            falling = falling
                 .SelectMany(fBrick => map[fBrick]
-                    .Where(top => !fell.Contains(top) && !map.Any(bottom => !fell.Contains(bottom.Key) && bottom.Value.Contains(top)))
+                    .Where(top => !map.Any(bottom => !fell.Contains(bottom.Key) && bottom.Value.Contains(top)))
                     .ToArray())
                 .Distinct()
                 .ToArray();
@@ -139,11 +142,11 @@ foreach (var inputFile in new[] { "sample.txt" ,"input.txt" })
             fell.AddRange(falling);
         }
 
-        return fell.Count;
+        return fell.Count - 1;
     }
 
     var part2 = bricks
-        .Select(b => wouldFall(new List<int>() { b.id }) - 1)
+        .Select(b => wouldFall(b.id))
         .Sum();
 
     Console.WriteLine($"Part 2: {part2}\n");
