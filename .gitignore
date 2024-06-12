@@ -354,3 +354,5 @@ MigrationBackup/
 
 # My AOC Input
 input.txt
+
+.idea/
