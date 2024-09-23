@@ -46,7 +46,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     var input = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
-        .ToList();
+        .ToArray();
 
     Console.WriteLine($"Part 1:");
     Console.WriteLine($"Part 2:\n");
