@@ -18,4 +18,37 @@ public static class PointExtensions
     {
         return new Point(point.X, point.Y + y);
     }
+    
+    public static Point Multiply(this Point point, int value)
+    {
+        return new Point(point.X * value, point.Y * value);
+    }
+    
+    public static Point RotateRight(this Point point, int degrees)
+    {
+        var radians = degrees % 360 * Math.PI / 180;
+        var x = (int)Math.Round(point.X * Math.Cos(radians) + point.Y * Math.Sin(radians));
+        var y = (int)Math.Round(-point.X * Math.Sin(radians) + point.Y * Math.Cos(radians));
+        return new Point(x, y);
+    }
+    
+    public static Point RotateRight(this Point point, Point around, int degrees)
+    {
+        var radians = degrees % 360 * (Math.PI / 180);
+        var translatedX = point.X - around.X;
+        var translatedY = point.Y - around.Y;
+        var x = (int)Math.Round(translatedX * Math.Cos(radians) + translatedY * Math.Sin(radians)) + around.X;
+        var y = (int)Math.Round(-translatedX * Math.Sin(radians) + translatedY * Math.Cos(radians)) + around.Y;
+        return new Point(x, y);
+    }
+    
+    public static Point RotateLeft(this Point point, int degrees)
+    {
+        return RotateRight(point, 360 - degrees % 360);
+    }
+    
+    public static Point RotateLeft(this Point point, Point around, int degrees)
+    {
+        return RotateRight(point, around, 360 - degrees % 360);
+    }
 }

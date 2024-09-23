@@ -16,7 +16,11 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .Where(line => !string.IsNullOrEmpty(line))
         .ToGrid();
 
-    int SimulateSeating(bool part1)
+    Console.WriteLine($"Part 1: {SimulateSeating()}");
+    Console.WriteLine($"Part 2: {SimulateSeating(false)}\n");
+    continue;
+
+    int SimulateSeating(bool part1 = true)
     {
         var seatsCopy = seats.Clone();
 
@@ -65,7 +69,4 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
         return seatsCopy.Count(seat => seat.value == '#');
     }
-    
-    Console.WriteLine($"Part 1: {SimulateSeating(true)}");
-    Console.WriteLine($"Part 2: {SimulateSeating(false)}\n");
 }

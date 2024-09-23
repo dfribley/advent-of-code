@@ -1,10 +1,11 @@
-﻿using System.Drawing;
+﻿using System.Collections;
+using System.Drawing;
 using System.Text;
 using AoC.Shared.Points;
 
 namespace AoC.Shared.Grid;
 
-public class Grid
+public class Grid : IEnumerable<(Point coordinate, char value)>
 {
 	private readonly Point[] neighbors = new[] { new Point(-1, 0), new Point(-1, -1), new Point(0, -1), new Point(1, -1), new Point(1, 0), new Point(1, 1), new Point(0, 1), new Point(-1, 1) };
 
@@ -59,6 +60,7 @@ public class Grid
 			   (point.Y <= MaxY || WrapNorth);
     }
 
+	[Obsolete("Use foreach/enumerator instead")]
 	public IEnumerable<(Point coordinate, char value)> All()
     {
         for (int y = 0; y <= MaxY; y++)
@@ -76,6 +78,25 @@ public class Grid
 			.Select(np => coordinate.Add(np))
 			.Where(IsValid)
 			.Select(np => (np, this[np]));
+	}
+	
+	public IEnumerable<(Point coordinate, char value)> NeighborsInSight(Point coordinate, Func<char, bool> canSeeThrough)
+	{
+		foreach (var direction in neighbors)
+		{
+			var np = coordinate.Add(direction);
+
+			while (IsValid(np))
+			{
+				if (!canSeeThrough(this[np]))
+				{
+					yield return (np, this[np]);
+					break;
+				}
+				
+				np = np.Add(direction);
+			}
+		}
 	}
 
 	public IEnumerable<Point> Where(Func<char, bool> condition)
@@ -147,7 +168,41 @@ public class Grid
 		return new Grid(((string[])_grid.Clone()).Reverse());
 	}
 
-    private char GetCharAt(int x, int y)
+	private void SetCharAt(int x, int y, char value)
+	{
+		var sb = new StringBuilder(_grid[y]);
+		sb[x] = value;
+
+		_grid[y] = sb.ToString();
+    }
+
+	public IEnumerator<(Point coordinate, char value)> GetEnumerator()
+	{
+		for (var y = MaxY; y >= 0; y--)
+		{
+			for (var x = 0; x <= MaxX; x++)
+			{
+				yield return (new Point(x, y), this[x, y]);
+			}
+		}
+	}
+
+	IEnumerator IEnumerable.GetEnumerator()
+	{
+		return GetEnumerator();
+	}
+	
+	public void Print()
+	{
+		var pw = new PixelWriter.PixelWriter(MaxX + 1);
+		
+		foreach (var (coordinate, value) in this)
+		{
+			pw.Write(value);
+		}
+	}
+
+	private char GetCharAt(int x, int y)
 	{
 		if (x > MaxX && WrapEast)
 		{
@@ -171,12 +226,4 @@ public class Grid
 
 		return _grid[y][x];
 	}
-
-	private void SetCharAt(int x, int y, char value)
-	{
-		var sb = new StringBuilder(_grid[y]);
-		sb[x] = value;
-
-		_grid[y] = sb.ToString();
-    }
 }
