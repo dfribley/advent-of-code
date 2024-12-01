@@ -2,9 +2,16 @@
 
 source ~/aoc_envars
 
-mkdir Day$1
+event=$1
+day_num=$2
 
-cat > Day$1/Day$1.csproj << EOF
+day=Day$day_num
+day_dir=$event/$day
+csproj=$day_dir/$day.csproj
+
+mkdir $day_dir
+
+cat > $csproj << EOF
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
@@ -13,7 +20,7 @@ cat > Day$1/Day$1.csproj << EOF
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <PublishSingleFile>True</PublishSingleFile>
-    <AssemblyName>day$1</AssemblyName>
+    <AssemblyName>day$day_num</AssemblyName>
     <LangVersion>default</LangVersion>
   </PropertyGroup>
 
@@ -33,8 +40,9 @@ cat > Day$1/Day$1.csproj << EOF
 </Project>
 EOF
 
-cat > Day$1/Program.cs << EOF
-Console.WriteLine("AOC - Day $1\n\n");
+cat > $day_dir/Program.cs << EOF
+// Advent of Code challenge: https://adventofcode.com/$event/day/$day_num
+Console.WriteLine("AoC - Day $day_num\n\n");
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
@@ -54,7 +62,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 }
 EOF
 
-curl -H "Cookie: session=$AOC__SESSION__TOKEN" "https://adventofcode.com/2023/day/$1/input" -o Day$1/input.txt
-touch Day$1/sample.txt
+curl -H "Cookie: session=$AOC__SESSION__TOKEN" "https://adventofcode.com/$event/day/$day_num/input" -o $day_dir/input.txt
+touch $day_dir/sample.txt
 
-dotnet sln AoC.2023.sln add Day$1/Day$1.csproj
+dotnet sln $event/AoC.$event.sln add $csproj
