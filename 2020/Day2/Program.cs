@@ -37,10 +37,8 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .Count();
 
     var part2 = input
-        .Where(t => new[] { t.password[t.pos1 - 1], t.password[t.pos2 - 1] }
-            .Where(c => c == t.character)
-            .Count() == 1)
-        .Count();
+        .Count(t => new char[] { t.password[t.pos1 - 1], t.password[t.pos2 - 1] }
+            .Count(c => c == t.character) == 1);
 
     Console.WriteLine($"Part 1: {part1}");
     Console.WriteLine($"Part 2: {part2}\n");

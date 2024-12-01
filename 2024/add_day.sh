@@ -10,11 +10,12 @@ cat > Day$1/Day$1.csproj << EOF
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>disable</Nullable>
     <PublishSingleFile>True</PublishSingleFile>
     <AssemblyName>day$1</AssemblyName>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

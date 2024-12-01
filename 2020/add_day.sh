@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source ~/aoc_envars
+event=2020
 
 mkdir Day$1
 
@@ -9,11 +10,12 @@ cat > Day$1/Day$1.csproj << EOF
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <PublishSingleFile>True</PublishSingleFile>
     <AssemblyName>day$1</AssemblyName>
+    <LangVersion>default</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,14 +48,14 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     var input = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
-        .ToArray();
+        .ToList();
 
     Console.WriteLine($"Part 1:");
     Console.WriteLine($"Part 2:\n");
 }
 EOF
 
-curl -H "Cookie: session=$AOC__SESSION__TOKEN" "https://adventofcode.com/2020/day/$1/input" -o Day$1/input.txt
+curl -H "Cookie: session=$AOC__SESSION__TOKEN" "https://adventofcode.com/$event/day/$1/input" -o Day$1/input.txt
 touch Day$1/sample.txt
 
-dotnet sln AoC.2020.sln add Day$1/Day$1.csproj
+dotnet sln AoC.$event.sln add Day$1/Day$1.csproj
