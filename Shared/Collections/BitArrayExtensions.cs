@@ -14,6 +14,6 @@ public static class BitArrayExtensions
             sb.Append((bool)bit ? "1" : "0");
         }
 
-        return sb.ToString();
+        return new string(sb.ToString().Reverse().ToArray());
     }
 }

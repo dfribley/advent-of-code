@@ -1,4 +1,3 @@
-using AoC.Shared.MathUtils;
 using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 13\n\n");
