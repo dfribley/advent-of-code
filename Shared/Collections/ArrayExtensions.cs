@@ -71,4 +71,22 @@ public static class ArrayExtensions
     {
         return enumerable.ToArray().ToInt64();
     }
+
+    public static T[] RemoveAt<T>(this T[] array, int index)
+    {
+        var result = new T[array.Length - 1];
+        var j = 0;
+
+        for (var i = 0; i < array.Length; i++)
+        {
+            if (i == index)
+            {
+                continue;
+            }
+
+            result[j++] = array[i];
+        }
+
+        return result;
+    }
 }
