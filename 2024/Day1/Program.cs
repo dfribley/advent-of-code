@@ -1,3 +1,4 @@
+using AoC.Shared.Enumerable;
 using AoC.Shared.Strings;
 
 Console.WriteLine("AOC - Day 1\n\n");
@@ -32,8 +33,9 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .Sum();
     Console.WriteLine($"Part 1: {part1}");
 
+    var counts = rightIds.ToCountsDictionary();
     var part2 = leftIds
-        .Select(lid => lid * rightIds.Count(rid => rid == lid))
+        .Select(lid => lid * counts.GetValueOrDefault(lid, 0))
         .Sum();
     Console.WriteLine($"Part 2: {part2}\n");
 }

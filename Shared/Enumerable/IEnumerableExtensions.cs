@@ -120,4 +120,10 @@ public static class IEnumerableExtensions
     {
         return new Wrapable<Type>(collection);
     }
+    
+    public static IReadOnlyDictionary<T, int> ToCountsDictionary<T>(this IEnumerable<T> collection) 
+        where T : notnull
+    {
+        return collection.GroupBy(val => val).ToDictionary(grp => grp.Key, grp => grp.Count());
+    }
 }
