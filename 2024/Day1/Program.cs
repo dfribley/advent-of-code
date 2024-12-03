@@ -31,11 +31,13 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     var part1 = leftIds
         .Select((lid, i) => Math.Abs(lid - rightIds[i]))
         .Sum();
+
     Console.WriteLine($"Part 1: {part1}");
 
     var counts = rightIds.ToCountsDictionary();
     var part2 = leftIds
         .Select(lid => lid * counts.GetValueOrDefault(lid, 0))
         .Sum();
+
     Console.WriteLine($"Part 2: {part2}\n");
 }

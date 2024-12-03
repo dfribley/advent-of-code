@@ -39,6 +39,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
              return false;
          });
+
     Console.WriteLine($"Part 2: {part2}\n");
 }
 

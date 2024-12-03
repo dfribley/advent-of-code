@@ -25,9 +25,9 @@ public class PixelWriter
 
     public void Write(Grid.Grid grid)
     {
-        for (int y = grid.MaxY; y >= 0; y--)
+        for (var y = grid.MaxY; y >= 0; y--)
         {
-            for (int x = 0; x <= grid.MaxX; x++)
+            for (var x = 0; x <= grid.MaxX; x++)
             {
                 Write(grid[x, y]);
             }
