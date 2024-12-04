@@ -26,8 +26,8 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     
     Console.WriteLine($"Part 1: {part1}");
 
-    var enabled = true;
     var part2 = 0;
+    var enabled = true;
     foreach (Match match in matches)
     {
         if (match.Value.StartsWith('d'))

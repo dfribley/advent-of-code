@@ -162,6 +162,26 @@ public class Grid : IEnumerable<(Point coordinate, char value)>
 
 		return this;
     }
+    
+    public bool Search(Point start, Point direction, string word)
+	{
+		if (!IsValid(start) || this[start] != word[0])
+		{
+			return false;
+		}
+		
+		var point = start;
+		return word.Skip(1).All(ltr =>
+		{
+			point = point.Add(direction);
+			return IsValid(point) && this[point] == ltr;
+		});
+	}
+
+	public bool Search(Point start, Point direction, params string[] words)
+	{
+		return words.Any(word => Search(start, direction, word));
+	}
 
 	public Grid Clone()
 	{
