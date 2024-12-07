@@ -13,7 +13,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     Console.WriteLine($"[{inputFile}]\n");
 
-    var input = File.ReadAllLines(inputFile)
+    var equations = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
         .Select(ln =>
         {
@@ -24,16 +24,16 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         })
         .ToArray();
 
-    var part1 = input
-        .Where(tst => IsTestValid(tst.test, tst.nums[0], tst.nums[1..]))
-        .Select(tst => tst.test)
+    var part1 = equations
+        .Where(eq => IsTestValid(eq.test, eq.nums[0], eq.nums[1..]))
+        .Select(eq => eq.test)
         .Sum();
 
     Console.WriteLine($"Part 1: {part1}");
     
-    var part2 = input
-        .Where(tst => IsTestValid(tst.test, tst.nums[0], tst.nums[1..], true))
-        .Select(tst => tst.test)
+    var part2 = equations
+        .Where(eq => IsTestValid(eq.test, eq.nums[0], eq.nums[1..], true))
+        .Select(eq => eq.test)
         .Sum();
     
     Console.WriteLine($"Part 2: {part2}\n");
