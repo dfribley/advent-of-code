@@ -25,14 +25,14 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .ToArray();
 
     var part1 = equations
-        .Where(eq => IsTestValid(eq.test, eq.nums[0], eq.nums[1..]))
+        .Where(eq => IsEquationValid(eq.test, eq.nums[0], eq.nums[1..]))
         .Select(eq => eq.test)
         .Sum();
 
     Console.WriteLine($"Part 1: {part1}");
     
     var part2 = equations
-        .Where(eq => IsTestValid(eq.test, eq.nums[0], eq.nums[1..], true))
+        .Where(eq => IsEquationValid(eq.test, eq.nums[0], eq.nums[1..], true))
         .Select(eq => eq.test)
         .Sum();
     
@@ -41,7 +41,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
 return;
 
-bool IsTestValid(long test, long val, int[] nums, bool part2 = false)
+bool IsEquationValid(long test, long val, int[] nums, bool part2 = false)
 {    
     if (nums.Length == 0)
     {
@@ -53,15 +53,15 @@ bool IsTestValid(long test, long val, int[] nums, bool part2 = false)
         return false;
     }
 
-    if (IsTestValid(test, val + nums[0], nums[1..], part2))
+    if (IsEquationValid(test, val + nums[0], nums[1..], part2))
     {
         return true;
     }
         
-    if (IsTestValid(test, val * nums[0], nums[1..], part2))
+    if (IsEquationValid(test, val * nums[0], nums[1..], part2))
     {
         return true;
     }
         
-    return part2 && IsTestValid(test, $"{val}{nums[0]}".ToInt64(), nums[1..], true);
+    return part2 && IsEquationValid(test, $"{val}{nums[0]}".ToInt64(), nums[1..], true);
 }
