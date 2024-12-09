@@ -126,4 +126,17 @@ public static class IEnumerableExtensions
     {
         return collection.GroupBy(val => val).ToDictionary(grp => grp.Key, grp => grp.Count());
     }
+    
+    public static IEnumerable<(T a,T b)> ToPairs<T>(this IEnumerable<T> collection)
+    {
+        var collectionArray = collection.ToArray();
+        
+        for (var i = 0; i < collectionArray.Length - 1; i++)
+        {
+            for (var j = i + 1; j < collectionArray.Length; j++)
+            {
+                yield return (collectionArray[i], collectionArray[j]);
+            }
+        }
+    }
 }
