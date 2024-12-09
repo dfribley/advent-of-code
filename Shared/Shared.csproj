@@ -8,16 +8,4 @@
     <LangVersion>default</LangVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <None Remove="BinarySearch\" />
-    <None Remove="Grid\" />
-    <None Remove="MathUtils\" />
-    <None Remove="Looping\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BinarySearch\" />
-    <Folder Include="Grid\" />
-    <Folder Include="MathUtils\" />
-    <Folder Include="Looping\" />
-  </ItemGroup>
 </Project>
