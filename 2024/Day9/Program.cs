@@ -114,7 +114,6 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     Console.WriteLine($"Part 1: {part1}");
     
     // File based defrag
-
     for (var i = 0; i < p2FileIndexes.Length; i++)
     {
         var (fid, idx, size) = p2FileIndexes[i];
