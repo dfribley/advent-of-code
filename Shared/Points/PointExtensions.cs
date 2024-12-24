@@ -11,7 +11,7 @@ public static class PointExtensions
     
     public static Point Subtract(this Point point1, Point point2)
     {
-        return new Point(point2.X - point1.X, point2.Y - point1.Y);
+        return new Point(point1.X - point2.X, point1.Y - point2.Y);
     }
 
     public static Point AddX(this Point point, int x)
