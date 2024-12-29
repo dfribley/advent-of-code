@@ -35,6 +35,8 @@ public class Grid : IEnumerable<(Point coordinate, char value)>
 	public bool WrapWest { get; set; }
 
 	public Point TopLeft { get => new(0, MaxY); }
+	
+	public Point TopRight { get => new(MaxX, MaxY); }
 
 	public Point BottomLeft { get => new(0, 0); }
 
@@ -220,6 +222,11 @@ public class Grid : IEnumerable<(Point coordinate, char value)>
 		{
 			pw.Write(value);
 		}
+	}
+	
+	public IEnumerable<char> GetRow(int y)
+	{
+		return _grid[y];
 	}
 
 	private char GetCharAt(int x, int y)

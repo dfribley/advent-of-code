@@ -22,4 +22,14 @@ public static class BinaryStringExtensions
     {
         return Convert.ToInt32(binaryString.ToString(), 2);
     }
+    
+    public static BinaryString ToBinaryString(this IEnumerable<string> strings)
+    {
+        return new BinaryString(string.Join("", strings));
+    }
+    
+    public static BinaryString ToBinaryString(this IEnumerable<bool> booleans)
+    {
+        return new BinaryString(string.Join("", booleans.Select(b => b ? "1" : "0")));
+    }
 }

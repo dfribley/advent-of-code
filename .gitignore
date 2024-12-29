@@ -355,4 +355,8 @@ MigrationBackup/
 # My AOC Input
 input.txt
 
+# Rider
 .idea/
+
+# Visual Studio Code
+.vscode/

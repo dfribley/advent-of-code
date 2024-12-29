@@ -38,6 +38,34 @@ public class BinaryString
         return _value;
     }
     
+    public static BinaryString operator +(BinaryString a, BinaryString b)
+    {
+        if (a._value.Length != b._value.Length)
+        {
+            throw new ArgumentException("Binary strings must be the same length");
+        }
+        
+        var newValue = new StringBuilder();
+        
+        var carry = '0';
+        
+        for (var i = a._value.Length - 1; i >= 0; i--)
+        {
+            var sum = a._value[i] + b._value[i] + carry - '0' - '0';
+            
+            newValue.Insert(0, sum % 2 == 1 ? '1' : '0');
+            
+            carry = sum > 1 ? '1' : '0';
+        }
+        
+        if (carry == '1')
+        {
+            newValue.Insert(0, '1');
+        }
+        
+        return new BinaryString(newValue.ToString());
+    }
+    
     public static BinaryString operator &(BinaryString a, BinaryString b)
     {
         if (a._value.Length != b._value.Length)
