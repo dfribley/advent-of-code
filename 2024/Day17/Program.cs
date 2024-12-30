@@ -19,16 +19,38 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt"})
 
     var registerA = input[0].Split(": ")[1].ToInt32();
     var program = input[3].Split(": ")[1].Split(",").Select(int.Parse).ToArray();
+    var output = RunProgram(program, registerA);
+    
+    Console.WriteLine($"Part 1: {string.Join(",", output)}");
 
-    Console.WriteLine($"Part 1: {RunProgram(program, registerA)}");
-    Console.WriteLine($"Part 2:\n");
+    var exponent = program.Length - 1;
+    var part2 = 0L;
+
+    do
+    {
+        part2 += (long)Math.Pow(8, exponent);
+        output = RunProgram(program, part2);
+        
+        if (output.Length > program.Length)
+        {
+            throw new Exception("Output is larger than the program");
+        }
+        
+        var compare = program.Length - 1 - exponent;
+        if (output.TakeLast(compare).SequenceEqual(program.TakeLast(compare)))
+        {
+            exponent = Math.Max(0, exponent - 1);
+        }
+    } while (!output.SequenceEqual(program));
+    
+    Console.WriteLine($"Part 2: {part2}\n");
 }
 
 return;
 
-string RunProgram(int[] program, int registerA)
+int[] RunProgram(int[] program, long registerA)
 {
-    var regA = (long) registerA;
+    var regA = registerA;
     var regB = 0L;
     var regC = 0L;
     var insPointer = 0;
@@ -61,8 +83,8 @@ string RunProgram(int[] program, int registerA)
                 regB ^= regC;
                 break;
             case Instructions.Out:
-                var val = (int) GetComboOperand(operand) % 8;
-                output.Add(val);
+                var val = GetComboOperand(operand) % 8;
+                output.Add((int)val);
                 break;
             case Instructions.Bdv:
                 regB = (long) Math.Floor(regA / Math.Pow(2, GetComboOperand(operand)));
@@ -76,7 +98,7 @@ string RunProgram(int[] program, int registerA)
     } 
     while (insPointer < program.Length);
 
-    return string.Join(",", output);
+    return output.ToArray();
 
     long GetComboOperand(int operand) => operand switch
     {
