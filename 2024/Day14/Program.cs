@@ -1,5 +1,6 @@
 // Advent of Code challenge: https://adventofcode.com/2024/day/14
 
+using System.Diagnostics;
 using System.Drawing;
 using AoC.Shared.PixelWriter;
 using AoC.Shared.Points;
@@ -40,8 +41,12 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt" })
         rows = 103;
         cols = 101;
     }
+
+    var sw = new Stopwatch();
+    sw.Start();
     
     var part1Robots = ActivateRobots(robots, rows, cols, 100);
+    
     var midRow = rows / 2;
     var midCol = cols / 2;
     var quad1 = 0;
@@ -51,19 +56,19 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt" })
     
     foreach (var robot in part1Robots)
     {
-        if (robot.pos.X < midCol && robot.pos.Y < midRow)
+        if (robot.X < midCol && robot.Y < midRow)
         {
             quad1++;
         }
-        else if (robot.pos.X > midCol && robot.pos.Y < midRow)
+        else if (robot.X > midCol && robot.Y < midRow)
         {
             quad2++;
         }
-        else if (robot.pos.X < midCol && robot.pos.Y > midRow)
+        else if (robot.X < midCol && robot.Y > midRow)
         {
             quad3++;
         }
-        else if (robot.pos.X > midCol && robot.pos.Y > midRow)
+        else if (robot.X > midCol && robot.Y > midRow)
         {
             quad4++;
         }
@@ -76,12 +81,26 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt" })
         Console.WriteLine();
         continue;
     }
-    
+
     // For part2, I looked for states where the number of robots in a given row was above 30,
     // printed the grid and then looped until I saw a Christmas tree!
     // Note: 6577 is the number of seconds it took to see the Christmas tree for my input.
-    // This will not be the same for you.
-    var part2 = 6577;
+    // --
+    // Then I saw a comment that the tree state was also where all the robot positions were unique.
+    var part2 = 0;
+
+    while (true)
+    {
+        var p2Robots = ActivateRobots(robots, rows, cols, part2);
+
+        if (!p2Robots.GroupBy(r => r).Any(g => g.Count() > 1))
+        {
+            break;
+        }
+
+        part2++;
+    }
+    
     Console.WriteLine($"Part 2: {part2}\n");
     
     var part2Robots = ActivateRobots(robots, rows, cols, part2);
@@ -91,47 +110,44 @@ foreach (var inputFile in new[] {"sample.txt", "input.txt" })
     {
         for (var x = 0; x < cols; x++)
         {
-            var count = part2Robots.Count(r => r.pos == new Point(x, y));
+            var count = part2Robots.Count(r => r == new Point(x, y));
             pw.Write(count > 0 ? $"{count}"[0] : '.');
         }
     }
+    
+    sw.Stop();
+    
+    Console.WriteLine($"Time: {sw.ElapsedMilliseconds}");
 }
 
 return;
 
-List<(Point pos, Point velocity)> ActivateRobots(List<(Point pos, Point velocity)> robots, int rows, int cols, int secs)
+Point[] ActivateRobots(List<(Point pos, Point velocity)> robots, int rows, int cols, int secs)
 {
-    while (secs-- > 0)
-    {
-        var newRobots = new List<(Point pos, Point velocity)>();
-
-        foreach (var robot in robots)
+    return robots
+        .Select(r =>
         {
-            var next = robot.pos.Add(robot.velocity);
-
-            if (next.X >= cols)
+            var pos = r.pos.Add(r.velocity.Multiply(secs));
+            
+            if (pos.X >= cols)
             {
-                next = next with { X = next.X % cols };
+                pos = pos with { X = pos.X % cols };
             }
-            else if (next.X < 0)
+            else if (pos.X < 0)
             {
-                next = next with { X = cols + next.X % cols };
+                pos = pos with { X = cols + (pos.X + 1) % cols - 1 };
             }
-
-            if (next.Y >= rows)
+            
+            if (pos.Y >= rows)
             {
-                next = next with { Y = next.Y % rows };
+                pos = pos with { Y = pos.Y % rows };
             }
-            else if (next.Y < 0)
+            else if (pos.Y < 0)
             {
-                next = next with { Y = rows + next.Y % rows };
+                pos = pos with { Y = rows + (pos.Y + 1) % rows - 1 };
             }
 
-            newRobots.Add(robot with { pos = next });
-        }
-
-        robots = newRobots;
-    }
-
-    return robots;
+            return pos;
+        })
+        .ToArray();
 }
