@@ -21,4 +21,7 @@ public static class GridDirections
     public static IEnumerable<Point> NorthNeighbors = new[] { NorthWest, North, NorthEast };
     public static IEnumerable<Point> EastNeighbors = new[] { NorthEast, East, SouthEast };
     public static IEnumerable<Point> SouthNeighbors = new[] { SouthWest, South, SouthEast };
+    
+    public static IEnumerable<Point> Vertical = new[] { North, South };
+    public static IEnumerable<Point> Horizontal = new[] { East, West };
 }
