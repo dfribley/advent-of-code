@@ -29,7 +29,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         })
         .ToDictionary(t => t.wire, t => t.value);
     var gates = input[1].Values
-        .Select((ln, i) =>
+        .Select(ln =>
         {
             var parts = ln.Split(" -> ");
             var operands = parts[0].Split(" ");
