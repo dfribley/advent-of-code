@@ -3,6 +3,7 @@
 using AoC.Shared.Strings;
 
 Console.WriteLine("AoC - Day 1\n\n");
+const int maxDial = 100;
 
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
@@ -24,19 +25,19 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     foreach (var (dir, dist) in rotations)
     {
-        var toZero = dir == 'R' ? 100 - dial: dial;
+        var toZero = dir == 'R' ? maxDial - dial: dial;
         if (toZero == 0)
         {
-            toZero = 100;
+            toZero = maxDial;
         }
 
         if (dist >= toZero)
         {
-            part2 += 1 + (dist - toZero) / 100;
+            part2 += 1 + (dist - toZero) / maxDial;
         }
         
         dial += dir == 'R' ? dist : -dist;
-        dial = (dial % 100 + 100) % 100;
+        dial = (dial % maxDial + maxDial) % maxDial;
         
         if (dial == 0)
         {
