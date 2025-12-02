@@ -16,7 +16,7 @@ public static class LineExtensions
 
     public static bool IsDiaganol(this Line line)
     {
-        return !line.IsVertical() && Math.Abs(line.DeltaY / line.DeltaX) == 1;
+        return !line.IsVertical() && MathF.Abs((float)line.DeltaY / line.DeltaX) == 1;
     }
 
     public static IEnumerable<Point> GetPoints(this Line line)

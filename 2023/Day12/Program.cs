@@ -22,6 +22,20 @@ foreach (var inputFile in new[] { "sample.txt" , "input.txt" })
         })
         .ToList();
 
+    var test = conditions
+        .Select(t =>
+        {
+            var newReport = MultiplyPattern(t.report, 5);
+            var newGroups = MultiplySequences(t.groups, 5);
+            
+            return FindValidArrangements(newReport, newGroups);
+        })
+        .Sum();
+    
+    Console.WriteLine($"Answer: {test}");
+    
+    continue;
+
     bool isValid(string condition, IList<int> groups)
     {
         var regex = new Regex(@"(#+)");
@@ -121,4 +135,47 @@ foreach (var inputFile in new[] { "sample.txt" , "input.txt" })
 
     // TODO: NEEDS WORK
     Console.WriteLine($"Part 2:\n");
+}
+
+static string MultiplyPattern(string pattern, int times)
+{
+    return string.Join("?", Enumerable.Repeat(pattern, times));
+}
+
+static List<int> MultiplySequences(List<int> sequences, int times)
+{
+    return Enumerable.Repeat(sequences, times).SelectMany(x => x).ToList();
+}
+
+static long FindValidArrangements(string pattern, List<int> expectedLengths)
+{
+    int n = pattern.Length;
+    int m = expectedLengths.Count;
+    var dp = new long[n + 1, m + 1];
+    dp[0, 0] = 1;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 0; j <= m; j++)
+        {
+            if (pattern[i - 1] == '?')
+            {
+                dp[i, j] += dp[i - 1, j];
+                if (j > 0 && i >= expectedLengths[j - 1] && pattern.Substring(i - expectedLengths[j - 1], expectedLengths[j - 1]).All(c => c == '#' || c == '?'))
+                {
+                    dp[i, j] += dp[i - expectedLengths[j - 1], j - 1];
+                }
+            }
+            else
+            {
+                dp[i, j] += dp[i - 1, j];
+                if (j > 0 && i >= expectedLengths[j - 1] && pattern.Substring(i - expectedLengths[j - 1], expectedLengths[j - 1]).All(c => c == '#'))
+                {
+                    dp[i, j] += dp[i - expectedLengths[j - 1], j - 1];
+                }
+            }
+        }
+    }
+
+    return dp[n, m];
 }
