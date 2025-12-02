@@ -3,43 +3,34 @@ using AoC.Shared.Strings;
 
 namespace AoC.Shared.Ranges;
 
-public class Range64 : IEnumerable<long>
+public class Range64(long start, long length) : IEnumerable<long>
 {
-    private readonly long _start;
-    private readonly long _end;
+    public long Start => start;
 
-    public Range64(long start, long length)
-	{
-        _start = start;
-        _end = start + length - 1;
-    }
+    public long End => start + length - 1;
 
-    public long Start => _start;
-
-    public long End => _end;
-
-    public long Length => _end - _start + 1;
+    public long Length => length;
 
     public bool Contains(long value)
     {
-        return _start <= value && value <= _end;
+        return Start <= value && value <= End;
     }
 
     public bool Contains(Range64 range)
     {
-        return _start <= range.Start && range.Start <= _end;
+        return Start <= range.Start && range.Start <= End;
     }
 
     public bool Overlaps(Range64 range)
     {
         return
-            (_start <= range.Start && range.Start <= _end) ||
-            (range.Start <= _start && _start <= range.End);
+            (Start <= range.Start && range.Start <= End) ||
+            (range.Start <= Start && Start <= range.End);
     }
     
     public IEnumerator<long> GetEnumerator()
     {
-        for (var i = _start; i <= _end; i++)
+        for (var i = Start; i <= End; i++)
             yield return i;
     }
 
