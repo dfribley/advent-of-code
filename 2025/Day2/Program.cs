@@ -1,4 +1,6 @@
 // Advent of Code challenge: https://adventofcode.com/2025/day/2
+
+using AoC.Shared.Enumerable;
 using AoC.Shared.Ranges;
 
 Console.WriteLine("AoC - Day 2\n\n");
