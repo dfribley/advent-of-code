@@ -5,6 +5,8 @@ using AoC.Shared.Points;
 
 Console.WriteLine("AoC - Day 4\n\n");
 
+const char paperChar = '@';
+
 foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 {
     if (!File.Exists(inputFile))
@@ -19,11 +21,11 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         .ToGrid();
 
     var part1 = grid
-        .Where(c => c == '@')
+        .Where(c => c == paperChar)
         .Count(p => GridDirections.Neighbors
             .Select(dir => p.Add(dir))
             .Where(grid.IsValid)
-            .Count(n => grid[n] == '@') < 4);
+            .Count(n => grid[n] == paperChar) < 4);
 
     Console.WriteLine($"Part 1: {part1}");
     
@@ -31,11 +33,11 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     while (true)
     {
         var toRemove = grid
-            .Where(c => c == '@')
+            .Where(c => c == paperChar)
             .Where(p => GridDirections.Neighbors
                 .Select(dir => p.Add(dir))
                 .Where(grid.IsValid)
-                .Count(n => grid[n] == '@') < 4)
+                .Count(n => grid[n] == paperChar) < 4)
             .ToList();
         
         if (toRemove.Count == 0)
