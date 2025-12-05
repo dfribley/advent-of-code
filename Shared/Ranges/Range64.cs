@@ -5,27 +5,47 @@ namespace AoC.Shared.Ranges;
 
 public class Range64(long start, long length) : IEnumerable<long>
 {
-    public long Start => start;
+    private long _start = start;
+    private long _end = start + length - 1;
+    
+    public long Start
+    {
+        get => _start;
+        set => _start = value;
+    }
 
-    public long End => start + length - 1;
-
-    public long Length => length;
+    public long End
+    {
+        get => _end;
+        set => _end = value;
+    }
+    
+    public long Size => End - Start + 1;
 
     public bool Contains(long value)
     {
         return Start <= value && value <= End;
     }
 
-    public bool Contains(Range64 range)
+    public bool FullyContains(Range64 range)
     {
-        return Start <= range.Start && range.Start <= End;
+        return Start <= range.Start && End >= range.End;
     }
 
-    public bool Overlaps(Range64 range)
+    public bool Intersects(Range64 range)
     {
-        return
-            (Start <= range.Start && range.Start <= End) ||
-            (range.Start <= Start && Start <= range.End);
+        return (Start < range.Start && End >= range.Start) || (End > range.End && Start <= range.End);
+    }
+
+    public void ShrinkToExclude(Range64 range)
+    {
+        if (!Intersects(range))
+        {
+            return;
+        }
+
+        if (range.Start < Start) Start = range.End + 1;
+        if (range.End > End) End = range.Start - 1;
     }
     
     public IEnumerator<long> GetEnumerator()
@@ -49,4 +69,21 @@ public class Range64(long start, long length) : IEnumerable<long>
         
         return new Range64(start, end - start + 1);
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Range64 range)
+        {
+            return Start == range.Start && End == range.End;
+        }
+    
+        return false;
+    }
+    
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(_start, _end);
+    }
+    
+    public override string ToString() => $"{Start}-{End}";
 }
