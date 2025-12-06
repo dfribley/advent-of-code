@@ -15,7 +15,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     Console.WriteLine($"[{inputFile}]\n");
 
     var input = File.ReadAllLines(inputFile).ToList();
-    var current = input.First().Length;
+    var ub = input.First().Length;
     var problems = input
         .Last()
         .Select((c, i) => (c, i))
@@ -25,10 +25,10 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         {
             var grid = new Grid(input
                 .Take(input.Count - 1)
-                .Select(line => line.Substring(t.i, current - t.i))
+                .Select(line => line.Substring(t.i, ub - t.i))
             );
 
-            current = t.i - 1;
+            ub = t.i - 1;
             return (op: t.c, grid);
         })
         .ToList();
