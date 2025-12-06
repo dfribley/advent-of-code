@@ -18,8 +18,8 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
     var ub = input.First().Length;
     var problems = input
         .Last()
-        .Select((c, i) => (c, i))
-        .Where(t => t.c != ' ')
+        .Select((c, i) => (op: c, i))
+        .Where(t => t.op != ' ')
         .Reverse()
         .Select(t =>
         {
@@ -29,7 +29,7 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
             );
 
             ub = t.i - 1;
-            return (op: t.c, grid);
+            return (t.op, grid);
         })
         .ToList();
     
