@@ -1,6 +1,5 @@
 // Advent of Code challenge: https://adventofcode.com/2025/day/8
 
-using System.Diagnostics;
 using System.Numerics;
 using AoC.Shared.Distance;
 using AoC.Shared.Enumerable;
@@ -17,22 +16,19 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
     Console.WriteLine($"[{inputFile}]\n");
 
-    var sw = new Stopwatch();
-    sw.Start();
-
     var boxes = File.ReadAllLines(inputFile)
         .Where(line => !string.IsNullOrEmpty(line))
         .Select((line, i) =>
         {
             var parts = line.Split(',');
-            return (id: i, coordinate: new Vector3(parts[0].ToInt32(), y: parts[1].ToInt32(), z: parts[2].ToInt32()));
+            return new Vector3(parts[0].ToInt32(), y: parts[1].ToInt32(), z: parts[2].ToInt32());
         })
         .ToList();
     var distances = boxes
         .ToPairs()
-        .OrderBy(t => Euclidean.GetDistance(t.a.coordinate, t.b.coordinate))
+        .OrderBy(t => Euclidean.GetDistance(t.a, t.b))
         .ToList();
-    var circuits = new List<List<int>>();
+    var circuits = new List<List<Vector3>>();
     var part1SetSize = inputFile.Contains("sample") ? 10 : 1000;
     
     foreach (var pair in distances.Take(part1SetSize))
@@ -56,27 +52,23 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
         
         if (circuits.Count == 1 && circuits.First().Count == boxes.Count)
         {
-            part2 = (long) pair.a.coordinate.X * (long) pair.b.coordinate.X;
+            part2 = (long) pair.a.X * (long) pair.b.X;
             break;
         }
     }
     
     Console.WriteLine($"Part 2: {part2}\n");
     
-    sw.Stop();
-    
-    Console.WriteLine("Total time: " + sw.Elapsed);
-    
     continue;
 
-    void ConnectBoxes((int id, Vector3 coordinate) a, (int id, Vector3 coordinate) b)
+    void ConnectBoxes(Vector3 a, Vector3 b)
     {
-        var aCircuit = circuits.FirstOrDefault(c => c.Contains(a.id));
-        var bCircuit = circuits.FirstOrDefault(c => c.Contains(b.id));
+        var aCircuit = circuits.FirstOrDefault(c => c.Contains(a));
+        var bCircuit = circuits.FirstOrDefault(c => c.Contains(b));
         
         if (aCircuit == null && bCircuit == null)
         {
-            circuits.Add([a.id, b.id]);
+            circuits.Add([a, b]);
             return;
         }
 
@@ -94,11 +86,11 @@ foreach (var inputFile in new[] { "sample.txt", "input.txt" })
 
         if (aCircuit != null)
         {
-            aCircuit.Add(b.id);
+            aCircuit.Add(b);
         }
         else
         {
-            bCircuit.Add(a.id);
+            bCircuit.Add(a);
         }
     }
 }
