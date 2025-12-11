@@ -56,4 +56,26 @@ public static class PointExtensions
     {
         return RotateRight(point, around, 360 - degrees % 360);
     }
+
+    public static Point GetDirection(this Point point, Point target)
+    {
+        var diff = target.Subtract(point);
+
+        if (diff.X == 0)
+        {
+            if (diff.Y > 0)
+            {
+                return new Point(0, 1);
+            }
+            
+            return new Point(0, -1);
+        }
+
+        if (diff.X > 0)
+        {
+            return new Point(1, 0);
+        }
+        
+        return new Point(-1, 0);
+    }
 }

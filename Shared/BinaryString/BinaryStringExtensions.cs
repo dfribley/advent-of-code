@@ -32,4 +32,18 @@ public static class BinaryStringExtensions
     {
         return new BinaryString(string.Join("", booleans.Select(b => b ? "1" : "0")));
     }
+
+    public static BinaryString ToBinaryString(this IEnumerable<int> indexes)
+    {
+        var array = indexes as int[] ?? indexes.ToArray();
+        var maxIndex = array.Max();
+        var bits = new bool[maxIndex + 1];
+        
+        foreach (var index in array)
+        {
+            bits[bits.Length - 1 - index] = true;
+        }
+        
+        return bits.ToBinaryString();
+    }
 }
